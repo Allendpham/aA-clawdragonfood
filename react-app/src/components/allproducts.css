@@ -1,0 +1,14 @@
+.product-card img {
+   width: 410.66px;
+   height: 410.66px;
+}
+
+.product-card {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.all-products-wrapper {
+   list-style: none;
+}

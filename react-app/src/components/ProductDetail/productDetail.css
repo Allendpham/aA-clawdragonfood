@@ -1,0 +1,9 @@
+.product-page-content {
+   display: flex;
+}
+
+.product-page-data {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+}
