@@ -18,6 +18,8 @@ class Product(db.Model):
 
    images = db.relationship('ProductImage', back_populates='product', lazy=False)
 
+   reviews = db.relationship('Review', back_populates='product')
+
    def to_dict(self):
       return {
          'id': self.id,

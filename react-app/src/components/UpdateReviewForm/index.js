@@ -1,21 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { createReviewThunk } from "../../store/review";
+import { loadProductsThunk } from "../../store/product";
+import { loadReviewsThunk, updateReviewThunk } from "../../store/review";
 
 
-const ReviewForm = () => {
+const UpdateReviewForm = () => {
    const dispatch = useDispatch();
    const history = useHistory();
-   const allProducts = useSelector(state => state.product.allProducts)
-   const currUser = useSelector(state => state.session.user)
-   const { productId } = useParams()
-   const chosenProduct = allProducts[productId]
+   const allReviews = useSelector(state => state?.review?.allReviews)
+   const currUser = useSelector(state => state?.session?.user)
+   const { productId, reviewId } = useParams()
+   const chosenReview = allReviews[reviewId]
 
-   const [review, setReview] = useState("");
-   const [title, setTitle] = useState("");
-   const [stars, setStars] = useState(1);
+   const [review, setReview] = useState(chosenReview?.message);
+   const [title, setTitle] = useState(chosenReview?.title);
+   const [stars, setStars] = useState(chosenReview?.rating);
    const [errors, setErrors] = useState([]);
+
+   useEffect(() => {
+      dispatch(loadProductsThunk())
+      dispatch(loadReviewsThunk(productId))
+   }, [])
+
+   if(!Object.values(allReviews).length) return null;
 
    const handleSubmit = async (e) => {
       e.preventDefault();
@@ -25,25 +33,25 @@ const ReviewForm = () => {
          title,
          rating: stars,
          userId: currUser.id,
-         productId: chosenProduct.id
+         productId: chosenReview.productId
       }
 
-      let createdReview = await dispatch(createReviewThunk(payload, productId))
-      if (createdReview.errors){
-         setErrors(createdReview.errors)
+      let updatedReview = await dispatch(updateReviewThunk(payload, reviewId))
+      if (updatedReview.errors){
+         setErrors(updatedReview.errors)
          return
       }
-      if (createdReview){
-         history.push(`/products/${productId}`)
+      if (updatedReview){
+         history.push(`/products/${chosenReview.productId}`)
       }
    }
 
 
    return (
       <form className='review-form-wrapper' onSubmit={handleSubmit}>
-         <div>Hello from Review Form for {chosenProduct?.name}</div>
+         <div>Hello from Update Review Form for {chosenReview?.title}</div>
          <div className="review-form-header">
-            <h3>Leave a Review!</h3>
+            <h3>Edit your Review!</h3>
          </div>
          <ul className='errors-list'>
             {errors.map((error, idx) => <li key={idx}><i className='fa fa-exclamation-circle' />  {error}</li>)}
@@ -123,10 +131,10 @@ const ReviewForm = () => {
             type='text'
             value={review}
             onChange={(e) => setReview(e.target.value)}
-            placeholder={`What did you think about ${chosenProduct.name}`}
+            // placeholder={`What did you think about ${chosenProduct.name}`}
             className='review-textarea'
             />
-            <div className='word-counter'>{255 - review.length > 0 ? 255 - review.length : 0} characters remaining</div>
+            <div className='word-counter'>{255 - review?.length > 0 ? 255 - review?.length : 0} characters remaining</div>
          </label>
 
          <button type="submit">Submit Review</button>
@@ -134,4 +142,4 @@ const ReviewForm = () => {
    )
 }
 
-export default ReviewForm;
+export default UpdateReviewForm;

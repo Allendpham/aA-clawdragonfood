@@ -10,6 +10,7 @@ import User from './components/User';
 import AllProducts from './components/AllProducts';
 import ProductDetail from './components/ProductDetail';
 import ReviewForm from './components/ReviewForm';
+import UpdateReviewForm from './components/UpdateReviewForm';
 import { authenticate } from './store/session';
 
 function App() {
@@ -42,6 +43,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path='/products/:productId/reviews/:reviewId/edit' exact={true}>
+          <UpdateReviewForm />
         </ProtectedRoute>
         <ProtectedRoute path='/products/:productId/reviews/new' exact={true}>
           <ReviewForm />
