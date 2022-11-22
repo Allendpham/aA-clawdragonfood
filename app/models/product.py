@@ -13,7 +13,7 @@ class Product(db.Model):
 
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String(255), nullable=False, unique=True)
-   description = db.Column(db.String(255), nullable=False)
+   description = db.Column(db.Text, nullable=False)
    price = db.Column(db.Float, nullable=False)
 
    images = db.relationship('ProductImage', back_populates='product', lazy=False)
