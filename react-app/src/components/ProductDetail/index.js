@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { loadProductsThunk } from "../../store/product";
 import { loadReviewsThunk, deleteReviewThunk } from "../../store/review";
+import { addToCart } from "../../store/cart";
 import { useParams } from "react-router-dom";
 import './productDetail.css'
 
@@ -15,6 +16,7 @@ const ProductDetail = () => {
    const chosenProduct = allProducts[productId]
 
    const allReviews = useSelector(state => Object.values(state?.review?.allReviews))
+   let content;
 
    useEffect(() => {
       dispatch(loadProductsThunk())
@@ -55,6 +57,46 @@ const ProductDetail = () => {
       el.appendChild(alert)
    }
 
+   const directToBuild = () => {
+      if(chosenProduct?.name?.includes('Bowls')) history.push('/products/bowl-box')
+      // Build the same component but just hand it different items
+      else if(chosenProduct?.name?.includes('Cups')) history.push('/products/cup-box')
+   }
+
+   const addToCart = () => {
+
+      //Build payload
+      const payload = {
+         name: chosenProduct?.name,
+         price: 24.00,
+         count: 1
+      }
+
+      // Check Local Storage
+      if(!localStorage.getItem('cart')){
+         payload['id'] = 1;
+         localStorage.setItem('cart', JSON.stringify([payload]))
+         // dispatch(addToCart(payload)) causes infinite loop
+      }
+      else {
+         const currentCart = JSON.parse(localStorage.getItem('cart'));
+         if(JSON.parse(localStorage.getItem('cart')).length === 0){
+            payload['id'] = 1
+         } else {
+            payload['id'] = currentCart.map(item => item.id)[currentCart.length - 1] + 1
+         }
+
+         currentCart.push(payload)
+         localStorage.setItem('cart', JSON.stringify(currentCart))
+         // dispatch(addToCart(payload)) causes infinite loop
+      }
+
+      history.push('/cart')
+   }
+
+   chosenProduct?.name?.includes("Bowls") || chosenProduct?.name?.includes("Cups") ?
+      content = (<button onClick={() => directToBuild()}>Build Your Box</button>) : content = (<button onClick={() => addToCart()}>Add to Cart</button>)
+
    return (
       <div className="spot-detail-wrapper">
          Hello from Product Detail
@@ -66,7 +108,10 @@ const ProductDetail = () => {
                <div>{chosenProduct?.name}</div>
                <div>{chosenProduct?.description}</div>
                <div>${chosenProduct?.price} per cup</div>
-               <button>Add to Cart</button>
+               {/* adjust above content to display different based on bowl or cup */}
+               {content}
+               {/* <button onClick={() => directToBuild()}>Build Your Box</button> */}
+               {/* Two different pages for build bowl box or cup box */}
             </div>
          </div>
          <div className="product-reviews-wrapper">

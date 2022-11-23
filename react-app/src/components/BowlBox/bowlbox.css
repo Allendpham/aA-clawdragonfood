@@ -1,0 +1,17 @@
+.bowl-box-wrapper {
+   width: 100vw;
+}
+
+.bowls-list {
+   display: grid;
+   width: 80%;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 10px;
+   grid-auto-rows: minmax(100px, auto);
+   list-style: none;
+}
+
+.bowls-list img {
+   width: 150px;
+   height: 150px;
+}

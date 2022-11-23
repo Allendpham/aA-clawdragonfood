@@ -11,6 +11,9 @@ import AllProducts from './components/AllProducts';
 import ProductDetail from './components/ProductDetail';
 import ReviewForm from './components/ReviewForm';
 import UpdateReviewForm from './components/UpdateReviewForm';
+import Cart from './components/Cart';
+import BowlBox from './components/BowlBox';
+import CupBox from './components/CupBox';
 import { authenticate } from './store/session';
 
 function App() {
@@ -41,6 +44,9 @@ function App() {
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
+        <Route path='/cart' exact={true}>
+          <Cart />
+        </Route>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
@@ -52,6 +58,12 @@ function App() {
         </ProtectedRoute>
         <Route path='/collections/all' exact={true}>
           <AllProducts />
+        </Route>
+        <Route path='/products/bowl-box'>
+          <BowlBox />
+        </Route>
+        <Route path='/products/cup-box'>
+          <CupBox />
         </Route>
         <Route path='/products/:productId' exact={true}>
           <ProductDetail />
