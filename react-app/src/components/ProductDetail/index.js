@@ -95,7 +95,12 @@ const ProductDetail = () => {
    }
 
    chosenProduct?.name?.includes("Bowls") || chosenProduct?.name?.includes("Cups") ?
-      content = (<button onClick={() => directToBuild()}>Build Your Box</button>) : content = (<button onClick={() => addToCart()}>Add to Cart</button>)
+   content = (<button onClick={() => directToBuild()}>Build Your Box</button>) : content = (<button onClick={() => addToCart()}>Add to Cart</button>)
+
+   let price;
+   if(chosenProduct?.name?.includes('Bowls')) price = (<div>${chosenProduct?.price} PER BOWL</div>)
+   else if(chosenProduct?.name?.includes("Cups")) price = (<div>${chosenProduct?.price} PER CUP</div>)
+   else price = (<div>${chosenProduct?.price} PER 6-PACK</div>)
 
    return (
       <div className="spot-detail-wrapper">
@@ -107,11 +112,8 @@ const ProductDetail = () => {
             <div className="product-page-data">
                <div>{chosenProduct?.name}</div>
                <div>{chosenProduct?.description}</div>
-               <div>${chosenProduct?.price} per cup</div>
-               {/* adjust above content to display different based on bowl or cup */}
+               {price}
                {content}
-               {/* <button onClick={() => directToBuild()}>Build Your Box</button> */}
-               {/* Two different pages for build bowl box or cup box */}
             </div>
          </div>
          <div className="product-reviews-wrapper">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from '../../store/cart';
+import { removeFromCart, updatePrice } from '../../store/cart';
 
 const CartItem = ({item, index}) => {
    const dispatch = useDispatch();
@@ -17,11 +17,24 @@ const CartItem = ({item, index}) => {
       cartItems.splice(index, 1)
       localStorage.setItem('cart', JSON.stringify(cartItems))
       dispatch(removeFromCart(item))
+
+      let calculation = 0;
+      cartItems?.forEach(item => {
+         calculation += (item.count * item.price)
+      })
+      dispatch(updatePrice(calculation))
    }
 
    const handleAdd = () => {
-      console.log("this is being added")
-      //Write code to change the value in localStorage!
+      let cartItems = JSON.parse(localStorage.getItem('cart'))
+      cartItems[index].count = Number(count)
+      localStorage.setItem('cart', JSON.stringify(cartItems))
+
+      let calculation = 0;
+      cartItems?.forEach(item => {
+         calculation += (item.count * item.price)
+      })
+      dispatch(updatePrice(calculation))
    }
 
    const handleCount = (num) => {

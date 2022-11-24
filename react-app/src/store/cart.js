@@ -4,6 +4,7 @@ const INCREMENT_ITEM_COUNT = 'cart/INCREMENT_ITEM_COUNT';
 const DECREMENT_ITEM_COUNT = 'cart/DECREMENT_ITEM_COUNT';
 const INPUT_ITEM_COUNT = 'cart/INPUT_ITEM_COUNT';
 const PURCHASE_CART = 'cart/PURCHASE_CART';
+const UPDATE_PRICE = 'cart/UPDATE_PRICE';
 
 export const addToCart = (item) => {
    return {
@@ -47,21 +48,35 @@ export const purchaseCart = () => {
    }
 }
 
+export const updatePrice = (price) => {
+   return {
+      type: UPDATE_PRICE,
+      price
+   }
+}
+
 //ONLY really need react to load cart and delete items??
-export default function cartReducer(state={}, action){
+const initialState = {items: {}, totalPrice: []}
+export default function cartReducer(state=initialState, action){
    switch(action.type){
+      // case ADD_TO_CART:
+      //    const newState = {
+      //       ...state,
+      //    };
+      //    newState[action.item.id] = { ...action.item };
+      //    return newState;
       case ADD_TO_CART:
-         const newState = {
-            ...state,
-         };
-         newState[action.item.id] = { ...action.item };
+         const newState = {...state}
+         newState.items[action.item.id] = {...action.item}
          return newState;
-
+      // case REMOVE_FROM_CART:
+      //    const removedState = {...state};
+      //    delete removedState[action.item.id]
+      //    return removedState;
       case REMOVE_FROM_CART:
-         const removedState = {...state};
-         delete removedState[action.item.id]
+         const removedState = {...state, items: {...state.items}};
+         delete removedState.items[action.item.id]
          return removedState;
-
       case INCREMENT_ITEM_COUNT:
          const incState = {...state};
          incState[action.produceId].count++;
@@ -77,8 +92,13 @@ export default function cartReducer(state={}, action){
          inputState[action.produceId].count = action.count;
          return inputState;
 
+      case UPDATE_PRICE:
+         const priceState = {...state, items: {...state.items}}
+         priceState.totalPrice = [action.price]
+         return priceState;
+
       case PURCHASE_CART:
-         return {};
+         return {items: {}, totalPrice: []};
 
       default:
          return state;
