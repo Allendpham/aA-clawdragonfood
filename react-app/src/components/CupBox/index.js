@@ -55,13 +55,13 @@ const CupBox = () => {
       // Build payload
       let contentsArr = [];
       if(chickenCount > 0){
-         contentsArr.push(`${chickenCount}X CHICKEN RAMEN CUPS`)
+         contentsArr.push(`${chickenCount}X CHICKEN RAMEN CUPS `)
       }
       if(misoCount > 0){
-         contentsArr.push(`${misoCount}X MISO RAMEN CUPS`)
+         contentsArr.push(`${misoCount}X MISO RAMEN CUPS `)
       }
       if(tonkCount > 0){
-         contentsArr.push(`${tonkCount}X SPICY TONKOTSU RAMEN CUPS`)
+         contentsArr.push(`${tonkCount}X SPICY TONKOTSU RAMEN CUPS `)
       }
 
       const payload = {

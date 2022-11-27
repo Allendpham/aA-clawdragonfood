@@ -50,11 +50,12 @@ const Cart = () => {
       //Then redirect to account page with order history displayed
       //Must be logged in to successfully check out, protect cart route?
 
-
-      dispatch(purchaseCart)
-      localStorage.removeItem('cart')
-      window.alert("Your purchase was successful! Thank you for your business.")
-      history.push('/')
+      let cart = localStorage.getItem('cart');
+      console.log('this will be the payload', cart, totalPrice)
+      // dispatch(purchaseCart)
+      // localStorage.removeItem('cart')
+      // window.alert("Your purchase was successful! Thank you for your business.")
+      // history.push('/')
    }
 
    cartItems?.length ? content = (<div>

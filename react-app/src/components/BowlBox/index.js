@@ -71,19 +71,19 @@ const BowlBox = () => {
       // Build payload
       let contentsArr = [];
       if(chickenCount > 0){
-         contentsArr.push(`${chickenCount}X CHICKEN PHO BOWLS`)
+         contentsArr.push(`${chickenCount}X CHICKEN PHO BOWLS `)
       }
       if(beefCount > 0){
-         contentsArr.push(`${beefCount}X BEEF PHO BOWLS`)
+         contentsArr.push(`${beefCount}X BEEF PHO BOWLS `)
       }
       if(vegetableCount > 0){
-         contentsArr.push(`${vegetableCount}X VEGETABLE PHO BOWLS`)
+         contentsArr.push(`${vegetableCount}X VEGETABLE PHO BOWLS `)
       }
       if(mushroomCount > 0){
-         contentsArr.push(`${mushroomCount}X MUSHROOM PHO BOWLS`)
+         contentsArr.push(`${mushroomCount}X MUSHROOM PHO BOWLS `)
       }
       if(laksaCount > 0){
-         contentsArr.push(`${laksaCount}X LAKSA PHO BOWLS`)
+         contentsArr.push(`${laksaCount}X LAKSA PHO BOWLS `)
       }
 
       const payload = {
