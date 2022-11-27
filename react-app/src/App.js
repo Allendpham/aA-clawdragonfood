@@ -14,6 +14,7 @@ import UpdateReviewForm from './components/UpdateReviewForm';
 import Cart from './components/Cart';
 import BowlBox from './components/BowlBox';
 import CupBox from './components/CupBox';
+import AccountPage from './components/AccountPage';
 import { authenticate } from './store/session';
 
 function App() {
@@ -47,6 +48,9 @@ function App() {
         <Route path='/cart' exact={true}>
           <Cart />
         </Route>
+        <ProtectedRoute path='/account' exact={true}>
+          <AccountPage />
+        </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
