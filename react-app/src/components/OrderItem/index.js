@@ -1,7 +1,6 @@
 
 
 const OrderItem = ({order}) => {
-   console.log("this is an order to work with", order)
 
    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
    const createdAt = new Date(order?.createdAt);

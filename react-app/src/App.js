@@ -45,9 +45,9 @@ function App() {
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
-        <Route path='/cart' exact={true}>
+        <ProtectedRoute path='/cart' exact={true}>
           <Cart />
-        </Route>
+        </ProtectedRoute>
         <ProtectedRoute path='/account' exact={true}>
           <AccountPage />
         </ProtectedRoute>

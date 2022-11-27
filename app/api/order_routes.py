@@ -31,9 +31,7 @@ def add_order():
    order = Order.query.order_by(Order.id.desc()).first().to_dict()
 
    items = json.loads(request.get_json()['items'])
-   print('these are the items----------------', json.loads(request.get_json()['items']))
    for item in items:
-      print("this is the itemXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", item)
       if 'Packets' in item['name']:
          # print(item['name'], item['count'])
          new_item = OrderItem(contents=item['name'], quantity=item['count'], orderId=new_order.to_dict()['id'])

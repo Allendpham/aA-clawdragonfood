@@ -6,9 +6,8 @@ import OrderItem from "../OrderItem";
 
 const AccountPage = () => {
    const dispatch = useDispatch()
-   const orders = useSelector(state => Object.values(state?.order?.allOrders))
+   const orders = useSelector(state => Object.values(state?.order?.allOrders)).reverse()
    const currUser = useSelector(state => state?.session?.user)
-
    // Reverse order of orders ?? need to orderBy createdAt and display orders accordingly
 
    useEffect(() => {

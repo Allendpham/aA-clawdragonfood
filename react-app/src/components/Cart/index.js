@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { updatePrice, purchaseCart } from "../../store/cart";
+import { addOrderThunk } from "../../store/order";
 import CartItem from "../CartItem";
 
 const Cart = () => {
@@ -10,6 +11,7 @@ const Cart = () => {
    const dispatch = useDispatch();
    const history = useHistory();
    // const [totalPrice, setTotalPrice] = useState(0);
+   const currUser = useSelector(state => state?.session?.user)
    const totalPrice = useSelector(state => state.cart.totalPrice)
    const cart = useSelector(state => state.cart.items)
 
@@ -49,13 +51,18 @@ const Cart = () => {
       //Upon successful checkout, display some type of modal or message saying thank you?
       //Then redirect to account page with order history displayed
       //Must be logged in to successfully check out, protect cart route?
-
       let cart = localStorage.getItem('cart');
-      console.log('this will be the payload', cart, totalPrice)
-      // dispatch(purchaseCart)
-      // localStorage.removeItem('cart')
+      const payload = {
+         userId: currUser.id,
+         totalPrice: totalPrice[0],
+         items: cart
+      }
+
+      dispatch(purchaseCart)
+      localStorage.removeItem('cart')
+      dispatch(addOrderThunk(payload))
       // window.alert("Your purchase was successful! Thank you for your business.")
-      // history.push('/')
+      history.push('/account')
    }
 
    cartItems?.length ? content = (<div>
