@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
 import { loadProductsThunk } from "../../store/product";
 import './homepage.css'
 
@@ -27,12 +28,30 @@ const HomePage = () => {
          <h2>Slurpable Favorites</h2>
          <ul>
             {bowls?.map(bowl => (
-               <li key={bowl?.id}>{bowl?.name}</li>
+               <li key={bowl?.id}>
+               <Link className='product-name' to={`/products/${bowl?.id}`}>
+                  <div className='favorite-card'>
+                     <img className='product-img' src={bowl?.images[0].imageUrl}/>
+                     <div >{bowl?.name}</div>
+                  </div>
+               </Link>
+               </li>
             ))}
             {cups?.map(cup => (
-               <li key={cup?.id} >{cup?.name}</li>
+               <li key={cup?.id}>
+               <Link className='product-name' to={`/products/${cup?.id}`}>
+                  <div className='favorite-card'>
+                     <img className='product-img' src={cup?.images[0].imageUrl}/>
+                     <div >{cup?.name}</div>
+                  </div>
+               </Link>
+               </li>
             ))}
          </ul>
+         <p>Snapdragon’s instant pho and instant ramen bring Asian cravings straight to your mouth. Our bold flavors are dairy-free and antibiotic-free, so you can slurp without guilt. We’ve got vegan and gluten-free noodles, too.</p>
+         <NavLink className='shop-food-link' to='/collections/all' exact={true} activeClassName='active'>
+            SHOP FOOD
+          </NavLink>
       </div>
    </div>)
 }
