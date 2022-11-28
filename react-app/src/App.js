@@ -15,6 +15,7 @@ import Cart from './components/Cart';
 import BowlBox from './components/BowlBox';
 import CupBox from './components/CupBox';
 import AccountPage from './components/AccountPage';
+import HomePage from './components/HomePage';
 import { authenticate } from './store/session';
 
 function App() {
@@ -73,7 +74,7 @@ function App() {
           <ProductDetail />
         </Route>
         <Route path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <HomePage />
         </Route>
       </Switch>
     </BrowserRouter>

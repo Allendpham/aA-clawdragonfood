@@ -9,41 +9,45 @@ const NavBar = () => {
 
   return (
     <nav>
-      <ul>
+      <ul className='nav-list'>
         <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            Home
+          <NavLink className='nav-link' to='/collections/all' exact={true} activeClassName='active'>
+            SHOP
           </NavLink>
         </li>
+
         <li>
-          <NavLink to='/collections/all' exact={true} activeClassName='active'>
-            Shop
+          <NavLink  className='nav-link' to='/' exact={true} activeClassName='active'>
+            <img className='home-logo' src='https://i.imgur.com/QrNt895.png' />
           </NavLink>
         </li>
-        {!currUser &&
-        <li>
-          <NavLink to='/login' exact={true} activeClassName='active'>
-            Login
-          </NavLink>
-        </li>}
-        {!currUser &&
-        <li>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
-        </li>}
-        {currUser &&
-        <li>
-          <NavLink to='/account' exact={true} activeClassName='active'>
-            Account
-          </NavLink>
-        </li>
-        }
-        <li>
-          <NavLink to='/cart' exact={true} activeClassName='active'>
-            Cart
-          </NavLink>
-        </li>
+        <div className='right-nav'>
+          {!currUser &&
+          <li>
+            <NavLink  className='nav-link' to='/login' exact={true} activeClassName='active'>
+              LOGIN
+            </NavLink>
+          </li>}
+          {!currUser &&
+          <li>
+            <NavLink className='nav-link' to='/sign-up' exact={true} activeClassName='active'>
+              SIGN UP
+            </NavLink>
+          </li>}
+          {currUser &&
+          <li>
+            <NavLink className='nav-link' to='/account' exact={true} activeClassName='active'>
+              ACCOUNT
+            </NavLink>
+          </li>
+          }
+          <li>
+            <NavLink className='nav-link' to='/cart' exact={true} activeClassName='active'>
+            <i class="fas fa-shopping-cart"></i>
+            </NavLink>
+          </li>
+
+        </div>
       </ul>
     </nav>
   );

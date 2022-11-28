@@ -1,1 +1,61 @@
 /* TODO Add site wide styles */
+
+body {
+   padding: 0;
+   margin: 0;
+   background-color: #fa8100;
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+video {
+   width: 100vw;
+   height: 560px;
+   object-fit: fill;
+}
+
+nav {
+   width: 100vw;
+   height: 115px;
+   background-image: url('https://i.imgur.com/BRo5Ze7.png');
+
+}
+
+.nav-list {
+   height: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0;
+   margin: 0;
+   padding-left: 70px;
+   padding-right: 70px;
+   list-style: none;
+}
+
+.nav-link {
+   text-decoration: none;
+   color: white;
+}
+
+.right-nav {
+   display: flex;
+}
+
+.right-nav li{
+   padding-left: 15px;
+}
+
+.video-heading{
+   color: white;
+   position: absolute;
+   padding-top: 110px;
+   padding-left: 70px;
+   font-size: 80px;
+   font-weight: 600;
+   line-height: 110px;
+}
+
+.home-logo {
+   height: 90px;
+   width: 175px;
+}
