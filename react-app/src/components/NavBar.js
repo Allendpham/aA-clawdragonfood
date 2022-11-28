@@ -10,16 +10,20 @@ const NavBar = () => {
   return (
     <nav>
       <ul className='nav-list'>
-        <li>
-          <NavLink className='nav-link' to='/collections/all' exact={true} activeClassName='active'>
-            SHOP
-          </NavLink>
-        </li>
+        <div className='left-nav'>
+          <li>
+            <NavLink className='nav-link' to='/collections/all' exact={true} activeClassName='active'>
+              SHOP
+            </NavLink>
+          </li>
+        </div>
 
         <li>
-          <NavLink  className='nav-link' to='/' exact={true} activeClassName='active'>
-            <img className='home-logo' src='https://i.imgur.com/QrNt895.png' />
-          </NavLink>
+          <div className='home-logo-div'>
+            <NavLink  className='nav-link' to='/' exact={true} activeClassName='active'>
+              <img className='home-logo' src='https://i.imgur.com/QrNt895.png' />
+            </NavLink>
+          </div>
         </li>
         <div className='right-nav'>
           {!currUser &&

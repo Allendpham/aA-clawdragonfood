@@ -36,6 +36,18 @@ const UpdateReviewForm = () => {
          productId: chosenReview.productId
       }
 
+      setErrors([])
+      if(review.length > 255 && !title.length){
+         setErrors(['Exceeds max character count: 255.', 'Please enter a title.'])
+         return
+      } else if(review.length > 255 && title.length){
+         setErrors(['Exceeds max character count: 255.'])
+         return
+      } else if(review.length < 255 && !title.length){
+         setErrors(['Please enter a title.'])
+         return
+      }
+
       let updatedReview = await dispatch(updateReviewThunk(payload, reviewId))
       if (updatedReview.errors){
          setErrors(updatedReview.errors)

@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from app.models import Review, db
 from app.forms import ReviewForm
 from flask_login import login_required
+from .auth_routes import validation_errors_to_error_messages
 
 review_routes = Blueprint('reviews', __name__)
 

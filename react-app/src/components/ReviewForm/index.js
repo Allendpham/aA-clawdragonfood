@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { createReviewThunk } from "../../store/review";
-
+import { loadProductsThunk } from "../../store/product";
 
 const ReviewForm = () => {
    const dispatch = useDispatch();
@@ -17,6 +17,13 @@ const ReviewForm = () => {
    const [stars, setStars] = useState(1);
    const [errors, setErrors] = useState([]);
 
+   useEffect(() => {
+      dispatch(loadProductsThunk())
+   }, [dispatch])
+
+   if(!Object.values(allProducts).length) return null;
+   if(!chosenProduct) return null;
+
    const handleSubmit = async (e) => {
       e.preventDefault();
 
@@ -25,7 +32,19 @@ const ReviewForm = () => {
          title,
          rating: stars,
          userId: currUser.id,
-         productId: chosenProduct.id
+         productId: chosenProduct?.id
+      }
+
+      setErrors([])
+      if(review.length > 255 && !title){
+         setErrors(['Exceeds max character count: 255.', 'Please enter a title.'])
+         return
+      } else if(review.length > 255 && title){
+         setErrors(['Exceeds max character count: 255.'])
+         return
+      } else if(review.length < 255 && !title.length){
+         setErrors(['Please enter a title.'])
+         return
       }
 
       let createdReview = await dispatch(createReviewThunk(payload, productId))
@@ -41,12 +60,12 @@ const ReviewForm = () => {
 
    return (
       <form className='review-form-wrapper' onSubmit={handleSubmit}>
-         <div>Hello from Review Form for {chosenProduct?.name}</div>
+         {/* <div>Hello from Review Form for {chosenProduct?.name}</div> */}
          <div className="review-form-header">
             <h3>Leave a Review!</h3>
          </div>
          <ul className='errors-list'>
-            {errors.map((error, idx) => <li key={idx}><i className='fa fa-exclamation-circle' />  {error}</li>)}
+            {errors?.map((error, idx) => <li key={idx}><i className='fa fa-exclamation-circle' />  {error}</li>)}
          </ul>
 
          <div className="star-radio-buttons">
@@ -123,7 +142,7 @@ const ReviewForm = () => {
             type='text'
             value={review}
             onChange={(e) => setReview(e.target.value)}
-            placeholder={`What did you think about ${chosenProduct.name}`}
+            placeholder={`What did you think about ${chosenProduct?.name}`}
             className='review-textarea'
             />
             <div className='word-counter'>{255 - review.length > 0 ? 255 - review.length : 0} characters remaining</div>

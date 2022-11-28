@@ -5,5 +5,148 @@
 .product-page-data {
    display: flex;
    flex-direction: column;
-   justify-content: space-evenly;
+   color: white;
+   margin-left: 60px;
+}
+
+.product-page-data h1{
+   font-size: 23px;
+   font-weight: 500;
+}
+
+.product-page-data p {
+   line-height: 30px;
+   font-size: 15px;
+}
+
+.spot-detail-wrapper {
+   margin: 56px 25px;
+   padding: 0 60px;
+}
+
+.product-page-images img{
+   width: 500px;
+   height: 500px;
+}
+
+.spot-detail-links, .shop-link{
+   color: white;
+   text-decoration: none;
+   font-size: 13px;
+   font-weight: 0;
+}
+
+.price {
+   font-weight: 700;
+   font-size: 22px;
+}
+
+.price span{
+   font-size: 13px;
+   font-weight: 300;
+}
+
+.disclaimer div{
+   font-size: 12px;
+   height: 20px;
+}
+
+.disclaimer span {
+   font-weight: 600;
+   font-size: 13px;
+}
+
+.build-button {
+   background-color: unset;
+   color: white;
+   border: 2px solid white;
+   width: 250px;
+   height: 62px;
+   font-size: 18px;
+   font-weight: 600;
+   margin-top: 15px;
+   transition: background-color 0.3s;
+}
+
+.build-button:hover {
+   background-color: white;
+   color: #fa8100;
+   cursor: pointer;
+}
+
+.product-reviews-wrapper{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   color: white;
+}
+
+.product-reviews-wrapper h2 {
+   font-weight: 500;
+   font-size: 19px;
+   border-bottom: 3px solid white;
+}
+
+.review-button-wrapper {
+   width: 100%;
+   display: flex;
+   justify-content: flex-end;
+
+}
+
+.new-review-link{
+   color: white;
+   text-decoration: none;
+   /* width: 100%; */
+   width: 100px;
+   font-size: 14px;
+   border: 1px solid rgb(25, 144, 198);
+   border-radius: 3px;
+   padding: 10px 15px;
+   background-color: rgb(25, 144, 198);
+   transition: background-color 0.2s;
+}
+
+.new-review-link:hover {
+   background-color: grey;
+}
+
+.reviews-display-wrapper {
+   width: 100%;
+   border: 1px solid white;
+   margin-top: 15px;
+   border-radius: 3px;
+   height: fit-content;
+}
+
+.no-reviews {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+}
+
+.review-list {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   list-style: none;
+}
+
+.review-title {
+   font-weight: 600;
+   font-size: 18px;
+}
+.review-title div {
+   font-weight: normal;
+   font-size: 12px;
+   padding-left: 25px;
+}
+
+.review-card {
+   padding: 15px;
+}
+
+.reviews-or-questions {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }

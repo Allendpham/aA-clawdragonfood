@@ -48,7 +48,7 @@ const ProductDetail = () => {
 
    const tempAlert = () => {
       const el = document.querySelector('.reviews-or-questions')
-      let alert = document.createElement("div");
+      let alert = document.createElement("p");
       alert.innerText = 'Successfully deleted your review.'
       alert.style.color = 'red';
       setTimeout(()=>{
@@ -95,39 +95,82 @@ const ProductDetail = () => {
    }
 
    chosenProduct?.name?.includes("Bowls") || chosenProduct?.name?.includes("Cups") ?
-   content = (<button onClick={() => directToBuild()}>Build Your Box</button>) : content = (<button onClick={() => addToCart()}>Add to Cart</button>)
+   content = (<button className='build-button' onClick={() => directToBuild()}>Build Your Box</button>) : content = (<button className='build-button' onClick={() => addToCart()}>Add to Cart</button>)
 
    let price;
-   if(chosenProduct?.name?.includes('Bowls')) price = (<div>${chosenProduct?.price} PER BOWL</div>)
-   else if(chosenProduct?.name?.includes("Cups")) price = (<div>${chosenProduct?.price} PER CUP</div>)
-   else price = (<div>${chosenProduct?.price} PER 6-PACK</div>)
+   if(chosenProduct?.name?.includes('Bowls')) price = (<div className='price'>${chosenProduct?.price}0 PER BOWL<span> (YOU CAN MIX & MATCH FLAVORS)</span></div>)
+   else if(chosenProduct?.name?.includes("Cups")) price = (<div className='price'>${chosenProduct?.price}.00 PER CUP<span> (YOU CAN MIX & MATCH FLAVORS)</span></div>)
+   else price = (<div className='price'>${chosenProduct?.price}.00 PER 6-PACK</div>)
+
+   //Helper function to parse date information
+   const displayDate = (date) => {
+      const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      const updatedAt = new Date(date);
+      const month = months[updatedAt.getMonth()];
+      const year = updatedAt.getFullYear();
+      const day = updatedAt.getDate();
+
+      return (<div>{month} {day}, {year}</div>)
+   }
 
    return (
       <div className="spot-detail-wrapper">
-         Hello from Product Detail
-         <div className='spot-detail-links'><Link to='/collections/all'>Shop</Link> - {chosenProduct?.name}</div>
+         <div className='spot-detail-links'><Link className='shop-link' to='/collections/all'>SHOP</Link> <i class='fas fa-angle-right'></i> {chosenProduct?.name.toUpperCase()}</div>
          <div className='product-page-content'>
             <div className="product-page-images"><img src={chosenProduct?.images[0].imageUrl}/></div>
 
             <div className="product-page-data">
-               <div>{chosenProduct?.name}</div>
-               <div>{chosenProduct?.description}</div>
+               <h1>{chosenProduct?.name.toUpperCase()}</h1>
+               <p>{chosenProduct?.description}</p>
+               {chosenProduct?.name?.includes('Bowls') && (
+                  <p>Each 2.1 oz bowl includes rice noodles & seasoning packet(s)</p>
+               )}
+               {chosenProduct?.name?.includes('Cups') && (
+                  <p>Each 2.2 oz cup includes authentic wheat ramen noodles, seasoning packet, vegetable packet and flavoring oil packet.</p>
+               )}
+
+               {chosenProduct?.name?.includes('Packets') && (
+                  <>
+                     <p>Each box contains (2) 2.1 oz packets. Each packet includes rice noodles & seasoning packet</p>
+                     <p>6-Pack is (6) 2-Pack boxes of 2.1 oz packets</p>
+                  </>
+               )}
                {price}
+               {chosenProduct?.name?.includes('Bowls') && (
+                  <p className='disclaimer'>
+                     <div>We only ship in increments of 6 bowls</div>
+                     <div>1 box = <span>6 delicious </span>bowls</div>
+                  </p>
+               )}
+               {chosenProduct?.name?.includes('Cups') && (
+                  <p className='disclaimer'>
+                     <div>We only ship in increments of 6 cups</div>
+                     <div>1 box = <span>6 delicious </span>cups</div>
+                  </p>
+               )}
                {content}
             </div>
          </div>
          <div className="product-reviews-wrapper">
-            <div className='reviews-or-questions'>REVIEWS</div>
-            {(allReviews.filter(review => review?.userId === currUser?.id).length === 0) &&
-            <NavLink className='new-review-link' to={`/products/${chosenProduct?.id}/reviews/new`} >Write a Review</NavLink>
-            }
+            <h2 className='reviews-or-questions'>REVIEWS</h2>
+            <div className='review-button-wrapper'>
+               {(allReviews.filter(review => review?.userId === currUser?.id).length === 0) &&
+               <NavLink className='new-review-link' to={`/products/${chosenProduct?.id}/reviews/new`} >Write a Review</NavLink>
+               }
+            </div>
             <div className='reviews-display-wrapper'>
+               {allReviews.length === 0 && (<p className='no-reviews'>There are no reviews yet.</p>)}
+
                <ul className='review-list'>
                   {allReviews?.map(review => (
                      <li key={review?.id}>
                         <div className='review-card'>
-                           <div>
-                              {review?.title} by {review?.user?.firstName} {review?.user?.lastName}
+                           <div className='review-title'>
+                              {review?.title}
+                              <div>
+                                 by {review?.user?.firstName} {review?.user?.lastName}
+                              </div>
+                              {displayDate(review?.updatedAt)}
                            </div>
                            <div>{displayStars(review?.rating)}</div>
                            <div>{review?.message}</div>
