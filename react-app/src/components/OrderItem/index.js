@@ -11,33 +11,38 @@ const OrderItem = ({order}) => {
 
    //Create Order Contents
    const checkItem = (item) => {
+
       if(item?.contents.includes('BOWLS')){
          return (
-            <li>Soup Bowl Box: {item?.contents} <div>Quantity: {item?.quantity}</div></li>
+            <li><img className='table-image' src={'https://i.imgur.com/OQx4fzX.png'}/><div>Soup Bowl Box: {item?.contents} <div>Quantity: {item?.quantity}</div></div></li>
          )
       } else if(item?.contents.includes('CUPS')){
          return (
-            <li>Ramen Cup Box: {item?.contents} <div>Quantity: {item?.quantity}</div></li>
+            <li><img className='table-image' src={'https://i.imgur.com/2dzGnBD.png'}/><div>Ramen Cup Box: {item?.contents} <div>Quantity: {item?.quantity}</div></div></li>
          )
-      } else {
+      } else if(item?.contents.includes('Garlic')){
          return (
-            <li>{item.contents} <div>Quantity: {item?.quantity}</div></li>
+            <li><img className='table-image' src={'https://i.imgur.com/8KSeQfL.png'}/><div>{item.contents} <div>Quantity: {item?.quantity}</div></div></li>
+         )
+      } else{
+         return (
+            <li><img className='table-image' src={'https://i.imgur.com/hffph36.png'}/><div>{item.contents} <div>Quantity: {item?.quantity}</div></div></li>
          )
       }
 
    }
 
    return (
-      <li>
-         Order Date:  {month} {day}, {year}
-         <div>Items</div>
-         <ul>
+      <li className='order-history-item'>
+         <span className='title'>Order Date:</span>  {month} {day}, {year}
+         <div className='title'>Items:</div>
+         <ul className='order-history-list'>
             {order?.items.map(item => (
                checkItem(item)
             ))}
          </ul>
          <div>
-            Total Price: ${order?.totalPrice}
+            <span className='title'>Total Price:</span> ${order?.totalPrice.toFixed(2)}
          </div>
       </li>
    )

@@ -1,0 +1,91 @@
+.account-page-wrapper{
+   width: 100vw;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.top-account{
+   text-align: center;
+}
+
+.top-account h1{
+   font-size: 26px;
+   color: #3a3a3a;
+   padding-bottom: 0;
+   margin-bottom: 0;
+}
+
+.top-account button{
+   background-color: unset;
+   border: unset;
+   color: #3a3a3a;
+}
+
+.top-account button:hover{
+   cursor: pointer;
+   text-decoration: underline;
+   font-weight: 700;
+}
+
+.bottom-account{
+   display: flex;
+   width: 60%;
+   justify-content: space-between;
+}
+
+.bottom-account h2{
+   color: #3a3a3a;
+   font-size: 17px;
+   margin-bottom: 5px;
+   width: 170px;
+}
+
+.bottom-account ul, .no-orders {
+   color: white;
+}
+
+.user-info{
+   list-style: none;
+   padding: 0;
+   line-height: 30px;
+   margin: 0;
+}
+
+.order-history{
+   list-style: none;
+   width: 70%;
+   height: 100%;
+   padding: 0;
+   margin: 0;
+}
+
+.account-right{
+   width: 200px;
+}
+
+.order-history-item{
+   margin: 15px 0;
+   padding-bottom: 15px;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.title{
+   font-weight: 600;
+}
+
+.order-history-list {
+   list-style: none;
+}
+
+.order-history-list li{
+   margin: 10px 0;
+   display: flex;
+   align-items: center;
+}
+
+.order-history-list img{
+   width: 35px;
+   height: 40px;
+}
