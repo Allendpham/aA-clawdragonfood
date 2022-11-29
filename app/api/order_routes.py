@@ -22,7 +22,7 @@ def add_order():
    """
    Add an order
    """
-   data = request.get_json()
+   data = request.get_json() #Getting data from req.body
    new_order = Order(userId=data['userId'], totalPrice=data['totalPrice'])
    db.session.add(new_order)
    db.session.commit()

@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { loadProductsThunk } from "../../store/product";
 import { addToCart } from "../../store/cart";
+import '../BowlBox/bowlbox.css'
+
 
 const CupBox = () => {
    const dispatch = useDispatch();
@@ -35,6 +37,29 @@ const CupBox = () => {
          case 2:
             setTonkCount(tonkCount - 1)
       }
+
+      let str;
+      switch(totalCount){
+         case 1:
+            str = 'one'
+            break
+         case 2:
+            str = 'two'
+            break
+         case 3:
+            str = 'three'
+            break
+         case 4:
+            str = 'four'
+            break
+         case 5:
+            str = 'five'
+            break
+         case 6:
+            str = 'six'
+      }
+      let element = document.getElementsByClassName(str)[0]
+      element.classList.add('hidden')
    }
 
    const handlePlus = (index) => {
@@ -49,6 +74,29 @@ const CupBox = () => {
          case 2:
             setTonkCount(tonkCount + 1)
       }
+
+      let str;
+      switch(totalCount){
+         case 0:
+            str = 'one'
+            break
+         case 1:
+            str = 'two'
+            break
+         case 2:
+            str = 'three'
+            break
+         case 3:
+            str = 'four'
+            break
+         case 4:
+            str = 'five'
+            break
+         case 5:
+            str = 'six'
+      }
+      let element = document.getElementsByClassName(str)[0]
+      element.classList.remove('hidden')
    }
 
    const handleAddToCart = () => {
@@ -114,7 +162,14 @@ const CupBox = () => {
 
          </div>
 
-         <div className='progress-bar'>Progress Bar Here</div>
+         <div className='progress-bar'>
+            <span className='one hidden'></span>
+            <span className='two hidden'></span>
+            <span className='three hidden'></span>
+            <span className='four hidden'></span>
+            <span className='five hidden'></span>
+            <span className='six hidden'></span>
+            </div>
 
          <ul className='bowls-list'>
             <li>

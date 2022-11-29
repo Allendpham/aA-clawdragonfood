@@ -17,7 +17,6 @@ const BowlBox = () => {
    const [vegetableCount, setVegetableCount] = useState(0)
    const [mushroomCount, setMushroomCount] = useState(0)
    const [laksaCount, setLaksaCount] = useState(0)
-   //Use useStates for all counters or do localStorage?
 
    useEffect(() => {
       dispatch(loadProductsThunk())
@@ -45,6 +44,29 @@ const BowlBox = () => {
          case 4:
             setLaksaCount(laksaCount - 1)
       }
+
+      let str;
+      switch(totalCount){
+         case 1:
+            str = 'one'
+            break
+         case 2:
+            str = 'two'
+            break
+         case 3:
+            str = 'three'
+            break
+         case 4:
+            str = 'four'
+            break
+         case 5:
+            str = 'five'
+            break
+         case 6:
+            str = 'six'
+      }
+      let element = document.getElementsByClassName(str)[0]
+      element.classList.add('hidden')
    }
 
    const handlePlus = (index) => {
@@ -65,6 +87,28 @@ const BowlBox = () => {
          case 4:
             setLaksaCount(laksaCount + 1)
       }
+      let str;
+      switch(totalCount){
+         case 0:
+            str = 'one'
+            break
+         case 1:
+            str = 'two'
+            break
+         case 2:
+            str = 'three'
+            break
+         case 3:
+            str = 'four'
+            break
+         case 4:
+            str = 'five'
+            break
+         case 5:
+            str = 'six'
+      }
+      let element = document.getElementsByClassName(str)[0]
+      element.classList.remove('hidden')
    }
 
    const handleAddToCart = () => {
@@ -136,7 +180,14 @@ const BowlBox = () => {
 
          </div>
 
-         <div className='progress-bar'>Progress Bar Here</div>
+         <div className='progress-bar'>
+            <span className='one hidden'></span>
+            <span className='two hidden'></span>
+            <span className='three hidden'></span>
+            <span className='four hidden'></span>
+            <span className='five hidden'></span>
+            <span className='six hidden'></span>
+            </div>
 
          <ul className='bowls-list'>
             <li>
