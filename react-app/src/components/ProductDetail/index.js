@@ -50,10 +50,10 @@ const ProductDetail = () => {
       const el = document.querySelector('.reviews-or-questions')
       let alert = document.createElement("p");
       alert.innerText = 'Successfully deleted your review.'
-      alert.style.color = 'red';
+      alert.style.color = 'white';
       setTimeout(()=>{
          el.removeChild(alert)
-      }, 1000)
+      }, 1500)
       el.appendChild(alert)
    }
 

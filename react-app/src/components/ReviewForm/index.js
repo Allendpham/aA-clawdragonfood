@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { createReviewThunk } from "../../store/review";
 import { loadProductsThunk } from "../../store/product";
+import { AiFillStar } from "react-icons/ai";
+import '../auth/form.css'
 
 const ReviewForm = () => {
    const dispatch = useDispatch();
@@ -16,6 +18,7 @@ const ReviewForm = () => {
    const [title, setTitle] = useState("");
    const [stars, setStars] = useState(1);
    const [errors, setErrors] = useState([]);
+   const [hover, setHover] = useState(null);
 
    useEffect(() => {
       dispatch(loadProductsThunk())
@@ -57,75 +60,63 @@ const ReviewForm = () => {
       }
    }
 
+   // const handleStarClick = (num) => {
+   //    let element1 = document.getElementsByClassName('ones')[0]
+   //    let element2 = document.getElementsByClassName('twos')[0]
+   //    let element3 = document.getElementsByClassName('threes')[0]
+   //    let element4 = document.getElementsByClassName('fours')[0]
+   //    let element5 = document.getElementsByClassName('fives')[0]
 
+   //    element1.classList.remove('gold')
+   //    element2.classList.remove('gold')
+   //    element3.classList.remove('gold')
+   //    element4.classList.remove('gold')
+   //    element5.classList.remove('gold')
+   //    // console.log(typeof num)
+
+   //    switch(num){
+   //       case 1:
+   //          element1.classList.add('gold')
+   //       case 2:
+   //          element1.classList.add('gold')
+   //          element2.classList.add('gold')
+   //    }
+   // }
+
+// on mouse exit, clear the stars
    return (
       <form className='review-form-wrapper' onSubmit={handleSubmit}>
          {/* <div>Hello from Review Form for {chosenProduct?.name}</div> */}
          <div className="review-form-header">
-            <h3>Leave a Review!</h3>
+            <h1>LEAVE A REVIEW</h1>
          </div>
          <ul className='errors-list'>
             {errors?.map((error, idx) => <li key={idx}><i className='fa fa-exclamation-circle' />  {error}</li>)}
          </ul>
 
-         <div className="star-radio-buttons">
-         <label>
-            Select a Rating
-            <label>
-            <input
-               type="radio"
-               value="1"
-               name="stars"
-               onChange={(e) => setStars(parseInt(e.target.value))}
-               checked={stars === 1 ? true: false}
-            />
-            ★
-            </label>
+         <div className='star-radio-buttons'>
+            {[...Array(5)].map((star,i) => {
+               const ratingValue = i + 1
 
-            <label>
-            <input
-               type="radio"
-               value="2"
-               name="stars"
-               onChange={(e) => setStars(parseInt(e.target.value))}
-               checked={stars === 2 ? true: false}
-            />
-            ★★
-            </label>
+               return (
+                  <label>
+                     <input
+                        type='radio'
+                        name='rating'
+                        value={ratingValue}
+                        onClick={() => setStars(ratingValue)}
+                     />
+                     <AiFillStar
+                        className="star"
+                        color={ ratingValue <= (hover||stars) ? "#f16522":"#e4e5e9"}
+                        size={45}
+                        onMouseEnter={()=>setHover(ratingValue)}
+                        onMouseLeave={()=>setHover(null)}
+                      />
+                  </label>
+               )
 
-            <label>
-            <input
-               type="radio"
-               value="3"
-               name="stars"
-               onChange={(e) => setStars(parseInt(e.target.value))}
-               checked={stars === 3 ? true: false}
-            />
-            ★★★
-            </label>
-
-            <label>
-            <input
-               type="radio"
-               value="4"
-               name="stars"
-               onChange={(e) => setStars(parseInt(e.target.value))}
-               checked={stars === 4 ? true: false}
-            />
-            ★★★★
-            </label>
-
-            <label>
-            <input
-               type="radio"
-               value="5"
-               name="stars"
-               onChange={(e) => setStars(parseInt(e.target.value))}
-               checked={stars === 5 ? true: false}
-            />
-            ★★★★★
-            </label>
-         </label>
+            })}
          </div>
 
          <div className='title-input'>
@@ -142,13 +133,13 @@ const ReviewForm = () => {
             type='text'
             value={review}
             onChange={(e) => setReview(e.target.value)}
-            placeholder={`What did you think about ${chosenProduct?.name}`}
+            placeholder={`What did you think about ${chosenProduct?.name}?`}
             className='review-textarea'
             />
             <div className='word-counter'>{255 - review.length > 0 ? 255 - review.length : 0} characters remaining</div>
          </label>
 
-         <button type="submit">Submit Review</button>
+         <button className='review-button' type="submit">Submit Review</button>
       </form>
    )
 }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import { NavLink } from 'react-router-dom';
+import './form.css'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -18,6 +20,11 @@ const LoginForm = () => {
     }
   };
 
+  const loginDemo = (email, password) =>{
+    setEmail(email)
+    setPassword(password)
+  }
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -32,32 +39,37 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={onLogin}>
+      <h1>LOGIN</h1>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
       <div>
-        <label htmlFor='email'>Email</label>
+        <div><label htmlFor='email'>Email</label></div>
         <input
           name='email'
           type='text'
-          placeholder='Email'
           value={email}
           onChange={updateEmail}
         />
       </div>
       <div>
-        <label htmlFor='password'>Password</label>
+        <div><label htmlFor='password'>Password</label></div>
         <input
           name='password'
           type='password'
-          placeholder='Password'
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
       </div>
+      <button type='submit'>LOGIN</button>
+
+      <button className='login-submit' onClick={() => {loginDemo('allen@aa.io', 'password')}}>DEMO USER</button>
+
+      <NavLink className='create-account-link' to='/sign-up' exact={true} activeClassName='active'>
+              CREATE ACCOUNT
+      </NavLink>
     </form>
   );
 };

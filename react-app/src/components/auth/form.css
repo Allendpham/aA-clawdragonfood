@@ -1,0 +1,101 @@
+form{
+   width: 0 auto;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding-top: 30px;
+}
+
+form h1 {
+   color: white;
+   font-weight: 500;
+   font-size: 26px;
+}
+
+form label {
+   color: white;
+   font-size: 13px;
+}
+
+form input {
+   border: unset;
+   width: 575px;
+   height: 25px;
+   border-radius: 1px;
+   margin-top: 7px;
+   margin-bottom: 15px;
+}
+
+form button {
+   background-color: white;
+   border: unset;
+   width: 130px;
+   height: 40px;
+   color: black;
+   margin-bottom: 10px;
+   font-size: 12px;
+}
+
+form button:hover{
+   cursor: pointer;
+}
+
+.create-account-link{
+   text-decoration: none;
+   color: white;
+   font-size: 14px;
+   padding-top: 10px;
+}
+
+.create-account-link:hover{
+   cursor: pointer;
+}
+
+form .star-radio-buttons{
+   display: flex;
+   flex-direction: row;
+
+}
+
+form .star-radio-buttons input{
+   width: fit-content;
+   margin: 0;
+   padding: 0;
+}
+
+form textarea{
+   width: 560px;
+   height: 100px;
+   border-radius: 1px;
+   border: unset;
+   font-family: 'Helvetica';
+   font-size: 16px;
+   font-weight: 400;
+   padding-left: 15px;
+   resize: none;
+}
+
+.star-radio-buttons label{
+   padding-left: 15px;
+}
+
+input[type='radio']{
+   display: none;
+}
+
+.star {
+   cursor: pointer;
+   transition: color 200ms;
+}
+
+.review-button {
+   background-color: unset;
+   border: 2px solid white;
+   color: white;
+   transition: background-color 0.4s;
+}
+
+.review-button:hover {
+   background-color: white;
+   color: black;
+}
