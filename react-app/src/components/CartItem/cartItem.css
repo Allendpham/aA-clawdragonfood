@@ -1,0 +1,62 @@
+.table-data{
+   padding: 20px 0;
+   display: flex;
+   align-items: center;
+}
+
+.count-input{
+   width: 30px;
+   height: 10px;
+   border: unset;
+   font-weight: 700;
+   padding: 10px 10px;
+   margin-right: 35px;
+   margin-left: 35px;
+}
+
+.input-wrapper {
+   text-align: center;
+}
+
+.table-price {
+   text-align: center;
+   font-size: 14px;
+}
+
+.table-name {
+   font-size: 14px;
+}
+
+.table-image {
+   width: 50px;
+   padding-right: 25px;
+}
+
+.table-size{
+   font-size: 12px;
+   padding: 10px 0;
+}
+
+.table-contents{
+   font-size: 14px;
+   font-weight: 600;
+   width: 50%;
+   line-height: 20px;
+   padding-bottom: 10px;
+}
+
+.table-data button{
+   background-color: unset;
+   color: white;
+   border: unset;
+   text-decoration: underline;
+   padding: 5px 0;
+}
+
+.table-data button:hover{
+   cursor: pointer;
+}
+
+td {
+   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}

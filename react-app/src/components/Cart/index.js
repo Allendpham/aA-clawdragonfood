@@ -4,6 +4,7 @@ import { Link, NavLink, useHistory } from "react-router-dom";
 import { updatePrice, purchaseCart } from "../../store/cart";
 import { addOrderThunk } from "../../store/order";
 import CartItem from "../CartItem";
+import './cart.css'
 
 const Cart = () => {
    let cartItems;
@@ -65,12 +66,12 @@ const Cart = () => {
       history.push('/account')
    }
 
-   cartItems?.length ? content = (<div>
+   cartItems?.length ? content = (<div className='cart-wrapper'>
       <h2>SHOPPING CART</h2>
-      <table>
+      <table className='table-wrapper'>
          <thead>
-            <tr>
-               <th>PRODUCT</th>
+            <tr className='table-headers'>
+               <th className='product-title'>PRODUCT</th>
                <th>PRICE</th>
                <th>QUANTITY</th>
                <th>TOTAL</th>
@@ -82,12 +83,17 @@ const Cart = () => {
             ))}
          </tbody>
       </table>
-      <div>
-         <div>SUBTOTAL ${totalPrice[0]} USD</div>
+      <div className='removing-cart-item'></div>
+      <div className='bottom-div'>
+         <div><span>SUBTOTAL</span> ${totalPrice[0]?.toFixed(2)} USD</div>
          <button onClick={() => handleCheckout()}>CHECK OUT</button>
       </div>
 
-   </div>) : content = (<div>Your Cart is Currently Empty</div>)
+   </div>) : content = (<div className='empty-cart-message'><div>Your Cart is Currently Empty</div>
+                           <div><NavLink className='empty-cart-link' to='/collections/all' exact={true} activeClassName='active'>
+                              Continue Shopping <i class='fas fa-long-arrow-alt-right'></i>
+                           </NavLink></div>
+                        </div>)
 
    return (
       <div>
