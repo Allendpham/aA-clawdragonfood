@@ -143,3 +143,15 @@ nav {
    background-color: white;
    color: black;
 }
+
+.social {
+   font-size: 25px;
+}
+
+.left-nav{
+   display: flex;
+   align-items: center;
+}
+.left-nav li {
+   padding-right: 15px;
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updatePrice } from '../../store/cart';
+import ErrorDisplay from '../ErrorDisplay';
 import './cartItem.css'
 
 const CartItem = ({item, index}) => {
@@ -13,7 +14,13 @@ const CartItem = ({item, index}) => {
     }, [item.count]);
 
 
-   const handleRemove = () => {
+   const handleRemove = (num) => {
+      setErrors([])
+      if(Number(num) > 10 || !Number(num)){
+         setErrors(['Quantity must be a number (1-10)'])
+         return
+      }
+
       let cartItems = JSON.parse(localStorage.getItem('cart'))
       cartItems.splice(index, 1)
       localStorage.setItem('cart', JSON.stringify(cartItems))
@@ -28,7 +35,13 @@ const CartItem = ({item, index}) => {
       tempAlert();
    }
 
-   const handleAdd = () => {
+   const handleAdd = (num) => {
+      setErrors([])
+      if(Number(num) > 10 || !Number(num)){
+         setErrors(['Quantity must be a number (1-10)'])
+         return
+      }
+
       let cartItems = JSON.parse(localStorage.getItem('cart'))
       cartItems[index].count = Number(count)
       localStorage.setItem('cart', JSON.stringify(cartItems))
@@ -85,13 +98,25 @@ const CartItem = ({item, index}) => {
          <td className='table-price'>${(item.price).toFixed(2)}</td>
          <td className='input-wrapper'>
             {/* Place error validation here to check input */}
+
             <input
                className='count-input'
                type="number"
                value={count}
                onChange={(e) => handleCount(e.target.value)}
-               onBlur={(e) => e.target.value < 1 ? handleRemove() : handleAdd()}
-               min="0"/>
+               onBlur={(e) => e.target.value < 1 ? handleRemove(e.target.value) : handleAdd(e.target.value)}
+               min="1"
+               max="10"/>
+
+            {/* <div className='cart-error'>
+               <ErrorDisplay id={'login-error-list'} errors={errors}/>
+            </div> */}
+
+            <ul className='cart-error-list'>
+                {errors.map((error) => (
+                            <li key={error}><i className='fa fa-exclamation-circle' /> {error} </li>
+                        ))}
+            </ul>
           </td>
 
          <td className='table-price'>${(item.price * count).toFixed(2)}</td>

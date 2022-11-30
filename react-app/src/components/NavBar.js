@@ -16,6 +16,14 @@ const NavBar = () => {
               SHOP
             </NavLink>
           </li>
+
+          <li>
+            <a className='nav-link social' target="_blank" href="https://github.com/Allendpham"><i class="fab fa-github"></i></a>
+          </li>
+
+          <li>
+          <a className='nav-link social' target="_blank" href="https://www.linkedin.com/in/allen-pham/"><i class="fab fa-linkedin"></i></a>
+          </li>
         </div>
 
         <li>

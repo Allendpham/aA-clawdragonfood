@@ -10,6 +10,7 @@
    border: unset;
    font-weight: 700;
    padding: 10px 10px;
+   padding-left: 15px;
    margin-right: 35px;
    margin-left: 35px;
 }
@@ -60,3 +61,12 @@
 td {
    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+.cart-error-list{
+   list-style: none;
+   font-size: 13px;
+   color:rgba(222, 8, 26, 0.8);
+   display: flex;
+   flex-wrap: wrap;
+   width: 100%;
+ }
