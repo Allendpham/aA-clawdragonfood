@@ -67,6 +67,7 @@ td {
    font-size: 13px;
    color:rgba(222, 8, 26, 0.8);
    display: flex;
-   flex-wrap: wrap;
+   justify-content: center;
    width: 100%;
+   padding: 0;
  }

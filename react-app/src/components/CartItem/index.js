@@ -16,7 +16,7 @@ const CartItem = ({item, index}) => {
 
    const handleRemove = (num) => {
       setErrors([])
-      if(Number(num) > 10 || !Number(num)){
+      if(Number(num) > 10 || Number(num) < 1){
          setErrors(['Quantity must be a number (1-10)'])
          return
       }
@@ -107,10 +107,6 @@ const CartItem = ({item, index}) => {
                onBlur={(e) => e.target.value < 1 ? handleRemove(e.target.value) : handleAdd(e.target.value)}
                min="1"
                max="10"/>
-
-            {/* <div className='cart-error'>
-               <ErrorDisplay id={'login-error-list'} errors={errors}/>
-            </div> */}
 
             <ul className='cart-error-list'>
                 {errors.map((error) => (
