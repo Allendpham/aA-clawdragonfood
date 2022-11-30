@@ -151,3 +151,22 @@
    flex-direction: column;
    align-items: center;
 }
+
+.edit-review-button, .delete-review-button{
+   background-color: unset;
+   color: white;
+   border: unset;
+   margin-left: 10px;
+   transition: background-color 0.3s;
+   border-radius: 5px;
+}
+
+.edit-review-button:hover, .delete-review-button:hover {
+   cursor: pointer;
+   font-size: 16px;
+   background-color: rgba(256, 256, 256, 0.4);
+}
+
+.edit-review-button {
+   margin-left: 25px;
+}

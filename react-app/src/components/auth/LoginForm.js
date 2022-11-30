@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import { NavLink } from 'react-router-dom';
+import ErrorDisplay from '../ErrorDisplay';
 import './form.css'
 
 const LoginForm = () => {
@@ -40,15 +41,21 @@ const LoginForm = () => {
   return (
     <form onSubmit={onLogin}>
       <h1>LOGIN</h1>
-      <div>
+      {/* <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
+      </div> */}
+
+      <div>
+        <ErrorDisplay id={'login-error-list'} errors={errors}/>
       </div>
       <div>
         <div><label htmlFor='email'>Email</label></div>
         <input
+          className="login-input"
           name='email'
+          id='login-email'
           type='text'
           value={email}
           onChange={updateEmail}
@@ -57,7 +64,9 @@ const LoginForm = () => {
       <div>
         <div><label htmlFor='password'>Password</label></div>
         <input
+          className="login-input"
           name='password'
+          id='login-password'
           type='password'
           value={password}
           onChange={updatePassword}

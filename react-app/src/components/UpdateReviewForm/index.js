@@ -4,7 +4,8 @@ import { useParams, useHistory } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import { loadProductsThunk } from "../../store/product";
 import { loadReviewsThunk, updateReviewThunk } from "../../store/review";
-
+import ErrorDisplay from "../ErrorDisplay";
+import '../auth/form.css'
 
 const UpdateReviewForm = () => {
    const dispatch = useDispatch();
@@ -40,13 +41,19 @@ const UpdateReviewForm = () => {
 
       setErrors([])
       if(review.length > 255 && !title.length){
-         setErrors(['Exceeds max character count: 255.', 'Please enter a title.'])
+         setErrors(['Message exceeds max character count: 255.', 'Please enter a title.'])
          return
       } else if(review.length > 255 && title.length){
-         setErrors(['Exceeds max character count: 255.'])
+         setErrors(['Message exceeds max character count: 255.'])
          return
-      } else if(review.length < 255 && !title.length){
+      } else if(review.length === 0 && title.length === 0){
+         setErrors(['Please enter a title.', 'Please enter a message.'])
+         return
+      } else if(review.length <= 255 && title.length === 0){
          setErrors(['Please enter a title.'])
+         return
+      } else if(title.length && review.length === 0){
+         setErrors(['Please enter a message.'])
          return
       }
 
@@ -66,78 +73,10 @@ const UpdateReviewForm = () => {
          <div className="review-form-header">
             <h1>EDIT YOUR REVIEW</h1>
          </div>
-         <ul className='errors-list'>
-            {errors.map((error, idx) => <li key={idx}><i className='fa fa-exclamation-circle' />  {error}</li>)}
-         </ul>
 
-         {/* <div className="star-radio-buttons">
-         <label>
-            Select a Rating
-            <label>
-            <input
-               type="radio"
-               value="1"
-               name="stars"
-               onChange={(e) => setStars(parseInt(e.target.value))}
-               checked={stars === 1 ? true: false}
-            />
-            ★
-            </label>
-
-            <label>
-            <input
-               type="radio"
-               value="2"
-               name="stars"
-               onChange={(e) => setStars(parseInt(e.target.value))}
-               checked={stars === 2 ? true: false}
-            />
-            ★★
-            </label>
-
-            <label>
-            <input
-               type="radio"
-               value="3"
-               name="stars"
-               onChange={(e) => setStars(parseInt(e.target.value))}
-               checked={stars === 3 ? true: false}
-            />
-            ★★★
-            </label>
-
-            <label>
-            <input
-               type="radio"
-               value="4"
-               name="stars"
-               onChange={(e) => setStars(parseInt(e.target.value))}
-               checked={stars === 4 ? true: false}
-            />
-            ★★★★
-            </label>
-
-            <label>
-            <input
-               type="radio"
-               value="5"
-               name="stars"
-               onChange={(e) => setStars(parseInt(e.target.value))}
-               checked={stars === 5 ? true: false}
-            />
-            ★★★★★
-            </label>
-         </label>
+         <div>
+            <ErrorDisplay id={'login-error-list'} errors={errors}/>
          </div>
-
-         <div className='title-input'>
-            <input
-               type='text'
-               value={title}
-               onChange={(e) => setTitle(e.target.value)}
-               placeholder='Review Title'
-            />
-         </div> */}
 
             <div className='star-radio-buttons'>
             {[...Array(5)].map((star,i) => {
@@ -164,13 +103,25 @@ const UpdateReviewForm = () => {
             })}
          </div>
 
+         <div className='title-input'>
+            <input
+               id='review-title'
+               className='login-input'
+               type='text'
+               value={title}
+               onChange={(e) => setTitle(e.target.value)}
+               placeholder='Review Title'
+            />
+         </div>
+
          <label>
             <textarea
+            id='review-message'
             type='text'
             value={review}
             onChange={(e) => setReview(e.target.value)}
-            // placeholder={`What did you think about ${chosenProduct.name}`}
-            className='review-textarea'
+            // placeholder={`What did you think about ${chosenProduct?.name}`}
+            className='review-textarea login-input'
             />
             <div className='word-counter'>{255 - review?.length > 0 ? 255 - review?.length : 0} characters remaining</div>
          </label>

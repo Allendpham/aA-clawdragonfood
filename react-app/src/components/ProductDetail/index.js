@@ -167,6 +167,12 @@ const ProductDetail = () => {
                         <div className='review-card'>
                            <div className='review-title'>
                               {review?.title}
+                              {currUser?.id === review?.userId && (
+                              <span className='user-review-buttons'>
+                                 <button className='edit-review-button' onClick={() => history.push(`/products/${review?.productId}/reviews/${review?.id}/edit`)}><i class="fas fa-edit"></i></button>
+                                 <button className='delete-review-button' onClick={() => handleDeleteClick(review?.id)}><i class="fas fa-trash"></i></button>
+                              </span>
+                           )}
                               <div>
                                  by {review?.user?.firstName} {review?.user?.lastName}
                               </div>
@@ -174,12 +180,12 @@ const ProductDetail = () => {
                            </div>
                            <div>{displayStars(review?.rating)}</div>
                            <div>{review?.message}</div>
-                           {currUser?.id === review?.userId && (
-                              <div className='user-review-buttons'>
-                                 <button onClick={() => history.push(`/products/${review?.productId}/reviews/${review?.id}/edit`)}>Edit</button>
-                                 <button onClick={() => handleDeleteClick(review?.id)}>Delete</button>
-                              </div>
-                           )}
+                           {/* {currUser?.id === review?.userId && (
+                              <span className='user-review-buttons'>
+                                 <button className='edit-review-button' onClick={() => history.push(`/products/${review?.productId}/reviews/${review?.id}/edit`)}><i class="fas fa-edit"></i></button>
+                                 <button className='delete-review-button' onClick={() => handleDeleteClick(review?.id)}><i class="fas fa-trash"></i></button>
+                              </span>
+                           )} */}
                         </div>
                      </li>
                   ))}

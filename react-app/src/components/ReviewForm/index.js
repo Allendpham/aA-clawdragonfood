@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { createReviewThunk } from "../../store/review";
 import { loadProductsThunk } from "../../store/product";
 import { AiFillStar } from "react-icons/ai";
+import ErrorDisplay from "../ErrorDisplay";
 import '../auth/form.css'
 
 const ReviewForm = () => {
@@ -38,17 +39,17 @@ const ReviewForm = () => {
          productId: chosenProduct?.id
       }
 
-      setErrors([])
-      if(review.length > 255 && !title){
-         setErrors(['Exceeds max character count: 255.', 'Please enter a title.'])
-         return
-      } else if(review.length > 255 && title){
-         setErrors(['Exceeds max character count: 255.'])
-         return
-      } else if(review.length < 255 && !title.length){
-         setErrors(['Please enter a title.'])
-         return
-      }
+      // setErrors([])
+      // if(review.length > 255 && !title){
+      //    setErrors(['Exceeds max character count: 255.', 'Please enter a title.'])
+      //    return
+      // } else if(review.length > 255 && title){
+      //    setErrors(['Exceeds max character count: 255.'])
+      //    return
+      // } else if(review.length < 255 && !title.length){
+      //    setErrors(['Please enter a title.'])
+      //    return
+      // }
 
       let createdReview = await dispatch(createReviewThunk(payload, productId))
       if (createdReview.errors){
@@ -90,9 +91,10 @@ const ReviewForm = () => {
          <div className="review-form-header">
             <h1>LEAVE A REVIEW</h1>
          </div>
-         <ul className='errors-list'>
-            {errors?.map((error, idx) => <li key={idx}><i className='fa fa-exclamation-circle' />  {error}</li>)}
-         </ul>
+
+         <div>
+            <ErrorDisplay id={'login-error-list'} errors={errors}/>
+         </div>
 
          <div className='star-radio-buttons'>
             {[...Array(5)].map((star,i) => {
@@ -121,6 +123,8 @@ const ReviewForm = () => {
 
          <div className='title-input'>
             <input
+               id='review-title'
+               className='login-input'
                type='text'
                value={title}
                onChange={(e) => setTitle(e.target.value)}
@@ -130,11 +134,12 @@ const ReviewForm = () => {
 
          <label>
             <textarea
+            id='review-message'
             type='text'
             value={review}
             onChange={(e) => setReview(e.target.value)}
             placeholder={`What did you think about ${chosenProduct?.name}?`}
-            className='review-textarea'
+            className='review-textarea login-input'
             />
             <div className='word-counter'>{255 - review.length > 0 ? 255 - review.length : 0} characters remaining</div>
          </label>
