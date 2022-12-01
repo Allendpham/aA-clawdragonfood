@@ -40,22 +40,35 @@ const UpdateReviewForm = () => {
       }
 
       setErrors([])
-      if(review.length > 255 && !title.length){
-         setErrors(['Message exceeds max character count: 255.', 'Please enter a title.'])
-         return
-      } else if(review.length > 255 && title.length){
-         setErrors(['Message exceeds max character count: 255.'])
-         return
-      } else if(review.length === 0 && title.length === 0){
-         setErrors(['Please enter a title.', 'Please enter a message.'])
-         return
-      } else if(review.length <= 255 && title.length === 0){
-         setErrors(['Please enter a title.'])
-         return
-      } else if(title.length && review.length === 0){
-         setErrors(['Please enter a message.'])
-         return
-      }
+      // if(review.length > 255 && !title.length){
+      //    setErrors(['Message exceeds max character count: 255.', 'Please enter a title.'])
+      //    return
+      // } else if(review.length > 255 && title.length){
+      //    setErrors(['Message exceeds max character count: 255.'])
+      //    return
+      // } else if(review.length === 0 && title.length === 0){
+      //    setErrors(['Please enter a title.', 'Please enter a message.'])
+      //    return
+      // } else if(review.length <= 255 && title.length === 0){
+      //    setErrors(['Please enter a title.'])
+      //    return
+      // } else if(title.length && review.length === 0){
+      //    setErrors(['Please enter a message.'])
+      //    return
+      // } else if(title.length > 50 && review.length > 255){
+      //    setErrors(['Title exceeds max character count: 50.', 'Message exceeds max character count: 255.'])
+      //    return
+      // }
+
+      let checkErrors = [];
+      if(review.length > 255) checkErrors.push('message : Message character limit is 255 characters.');
+      else if(review.length === 0) checkErrors.push('message : Please enter a message.');
+
+      if(title.length === 0) checkErrors.push('title : Please enter a title.');
+      else if(title.length > 50) checkErrors.push('title : Title character limit is 50 characters.')
+      setErrors(checkErrors)
+      if(checkErrors.length) return;
+
 
       let updatedReview = await dispatch(updateReviewThunk(payload, reviewId))
       if (updatedReview.errors){

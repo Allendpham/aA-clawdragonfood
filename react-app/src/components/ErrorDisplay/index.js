@@ -14,7 +14,7 @@ function ErrorDisplay({errors, id}) {
 
   for(let field of splashInputs){
    if(field.id === 'review-title'){
-      (errors.includes('title : Please enter a title.'))?
+      (errors.includes('title : Please enter a title.') || errors.includes('title : Title character limit is 50 characters.'))?
       field.classList.add('error-border'):field.classList.remove('error-border')
    }
 
