@@ -46,6 +46,9 @@ const NavBar = () => {
               SIGN UP
             </NavLink>
           </li>} */}
+
+          <NavLink className='nav-link' to='/retailers' exact={true}>RETAILERS</NavLink>
+
           {currUser &&
           <li>
             <NavLink className='nav-link' to='/account' exact={true} activeClassName='active'>

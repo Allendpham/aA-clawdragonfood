@@ -16,6 +16,7 @@ import BowlBox from './components/BowlBox';
 import CupBox from './components/CupBox';
 import AccountPage from './components/AccountPage';
 import HomePage from './components/HomePage';
+import RetailersPage from './components/RetailersPage';
 import { authenticate } from './store/session';
 
 function App() {
@@ -61,6 +62,9 @@ function App() {
         <ProtectedRoute path='/products/:productId/reviews/new' exact={true}>
           <ReviewForm />
         </ProtectedRoute>
+        <Route path='/retailers' exact={true}>
+          <RetailersPage />
+        </Route>
         <Route path='/collections/all' exact={true}>
           <AllProducts />
         </Route>

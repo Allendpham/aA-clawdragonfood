@@ -1,0 +1,23 @@
+.retailers-bottom-section{
+   display: flex;
+   width: 0 auto;
+   justify-content: center;
+}
+
+.locations-sidebar{
+   height: 800px;
+   width: 300px;
+   background-color: rgba(256, 256, 256, 0.2);
+}
+
+.locations-sidebar ul{
+   color: white;
+   list-style-type: none;
+   padding-left: 0;
+}
+
+.locations-sidebar ul li{
+   padding: 25px;
+   border-bottom: 1px solid rgba(256, 256, 256, 0.2);
+   padding-left: 15px;
+}
