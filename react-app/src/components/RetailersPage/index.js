@@ -19,85 +19,77 @@ const RetailersPage = () => {
   //Reverse Geocode function
   const getAddress = async (lat, lng) => {
 
-    for(let i = 0; i < 3; i++){
-      Geocode.fromLatLng(lat.toFixed(5), lng.toFixed(5)).then(
-        (response) => {
-          const address = response.results[0].formatted_address;
-          // console.log(address);
-          // valid = address;
-          return address;
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    }
-  }
-
-  //Seeding Example Locations for Example Purposes Only, No Real Locations
-  const generateMarkers = async (inLat, inLng) => {
-    let maxLat = inLat + 0.05;
-    let minLat = inLat - 0.05;
-
-    let maxLng = inLng + 0.05;
-    let minLng = inLng - 0.05;
-
-    let res = [];
-    let addressRes = []
-    for(let i = 1; i < 6; i++){
-      let lat = (Math.random() * (maxLat - minLat + 1)) + minLat;
-      let lng = (Math.random() * (maxLng - minLng + 1)) + minLng;
-
-      let validAddress = getAddress(lat, lng);
-
-        // Geocode.fromLatLng(lat.toFixed(5), lng.toFixed(5)).then(
-        //   (response) => {
-        //     const address = response.results[0].formatted_address;
-        //     // console.log(address);
-        //     valid = address;
-        //     console.log(valid)
-        //   },
-        //   (error) => {
-        //     console.error(error);
-        //   }
-        // );
-
-      console.log(validAddress);
-
-
-      // Geocode.fromLatLng(lat.toFixed(5), lng.toFixed(5)).then(
+      // Geocode.fromLatLng(lat.toString(), lng.toString()).then(
       //   (response) => {
       //     const address = response.results[0].formatted_address;
-      //     let city, state, country;
-      //     for (let i = 0; i < response.results[0].address_components.length; i++) {
-      //       for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
-      //         switch (response.results[0].address_components[i].types[j]) {
-      //           case "locality":
-      //             city = response.results[0].address_components[i].long_name;
-      //             break;
-      //           case "administrative_area_level_1":
-      //             state = response.results[0].address_components[i].long_name;
-      //             break;
-      //           case "country":
-      //             country = response.results[0].address_components[i].long_name;
-      //             break;
-      //         }
-      //       }
-      //     }
-      //     console.log(city, state, country);
       //     console.log(address);
+      //     // valid = address;
+
+      //       // console.log(addresses)
+      //       // let toAdd = addresses.push(address);
+      //       // setAddresses(toAdd);
+
+      //     // let toAdd = addresses.push(address);
+      //     // setAddresses(toAdd);
+      //     // return address;
       //   },
       //   (error) => {
-      //     console.error(error);
+      //     // console.error(error);
+      //     let newLat = randomNumber(lat, 0.00001);
+      //     let newLng = randomNumber(lng, 0.00001);
+
+      //     getAddress(newLat, newLng);
       //   }
       // );
 
+      // return address;
+  }
+
+  //Generate Random Lat/Lng Number
+  const randomNumber = (num, diff) => {
+    let max = num + diff;
+    let min = num - diff;
+
+    let res = (Math.random() * (max - min)) + min
+    return res;
+  }
+
+  //Seeding Example Locations for Example Purposes Only, No Real Locations
+  const generateMarkers = (inLat, inLng) => {
+    let res = [];
+    for(let i = 1; i < 6; i++){
+      let lat = randomNumber(inLat, 0.12);
+      let lng = randomNumber(inLng, 0.12);
+
+      // let address = getAddress(lat, lng);
+      // console.log(address);
+      // console.log("-----", addresses);
+        // Geocode.fromLatLng(lat.toString(), lng.toString()).then(
+        //   (response) => {
+        //     const address = response.results[0].formatted_address;
+        //     // console.log(address);
+        //     // valid = address;
+        //     console.log(address)
+        //     if(address) valid = false;
+        //   },
+        //   (error) => {
+        //     console.error(error);
+        //     lat = randomNumber(inLat)
+        //     lng = randomNumber(inLng)
+        //     console.log("this is a bad one!")
+        //   }
+        // );
+
+      // console.log(validAddress);
+
+      const address = `${Math.floor(Math.random() * 1000)} Example Dr, Example, US 12345`
 
       res.push({
         id: i,
         lat,
         lng,
-        name: 'Testing',
+        address,
+        name: `${i}`+ address,
         color: 'rgb(247,151,38)'
       })
     }
@@ -105,16 +97,10 @@ const RetailersPage = () => {
     setMarkers(res);
   }
 
-  let marker = {
-    id: 1,
-    lat: 30.1389,
-    lng: -97.9065,
-    color: 'rgb(247,151,38)'
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
+    setAddresses([]);
 
     Geocode.fromAddress(location).then(
       (response) => {
@@ -128,6 +114,16 @@ const RetailersPage = () => {
       );
   }
 
+  const markerClick = (markerId) => {
+    const elements = document.querySelectorAll('.address')
+    for(let i = 0; i < elements.length; i++){
+      if(i === (markerId - 1)){
+        elements[i].classList.add('selected');
+      } else {
+        elements[i].classList.remove('selected');
+      }
+    }
+  }
 
   const { isLoaded } = useJsApiLoader({
       id: 'google-map-script',
@@ -151,10 +147,17 @@ const RetailersPage = () => {
 
         <div className='retail-information'>
           <h1>Snapdragon in Stores</h1>
-          <p>For when your hankering for noodles can’t wait for shipping, enter your zip code below to find your nearest retailer of Snapdragon Foods. We're across the map — you can likely find us at your local Costco, Whole Foods Market, Walmart, and more stores. Just keep in mind that not all products are available everywhere. That’s why we recommend keeping a healthy stash on hand at all times.</p>
-          <p>The below list doesn’t reflect Costco because it’s too hard to keep track of which Costco stores have our products and which ones are out of stock. Yeah, they move that fast.</p>
-          <p>Prefer to shop from your couch? We've got you. Order our instant pho bowls or instant miso ramen and get free shipping on orders $50+. Yum.</p>
-          <p>Disclaimer: These locations are not real locations. Educational purposes only.</p>
+          <div className='retail-bottom-info'>
+            <img src='https://i.imgur.com/NWpmsRL.jpg'/>
+
+            <div className='retail-paragraphs'>
+              <p>For when you're hankering for noodles and can’t wait for shipping, enter your zip code below to find your nearest retailer of Snapdragon Foods. We're across the map — you can likely find us at your local Costco, Whole Foods Market, Walmart, and more stores. Just keep in mind that not all products are available everywhere. That’s why we recommend keeping a healthy stash on hand at all times.</p>
+              <p>The below list doesn’t reflect Costco because it’s too hard to keep track of which Costco stores have our products and which ones are out of stock. Yeah, they move that fast.</p>
+              <p>Prefer to shop from your couch? We've got you. Order our instant pho bowls or instant miso ramen and get free shipping on orders $50+. Yum.</p>
+              <p>Disclaimer: These locations are not real locations. Educational purposes only.</p>
+            </div>
+          </div>
+
         </div>
 
         <form id='google-map-form-input' onSubmit={handleSubmit}>
@@ -177,7 +180,7 @@ const RetailersPage = () => {
             <span className='locations-sidebar'>
               <ul>
                 {markers.map((marker) => (
-                  <li key={marker.id}>{marker.id}</li>
+                  <li key={marker.id} className='address' id={marker.id}>{marker.id}{marker.address}</li>
                 ))}
               </ul>
               </span>
@@ -186,7 +189,7 @@ const RetailersPage = () => {
             <span style={{ height: '900px', width: '900px' }}>
                 {isLoaded && currentPosition ?<GoogleMap
                   mapContainerStyle={containerStyle}
-                  zoom={8}
+                  zoom={10}
                   center={currentPosition}
                   onUnmount={onUnmount}
                   >
@@ -203,7 +206,7 @@ const RetailersPage = () => {
                         strokeWeight: 2
                         }}
                         streetView={false}
-                        onClick={() => console.log("I have been clicked!", marker.id)}
+                        onClick={() => markerClick(marker.id)}
                         />
                   ))}
                 </GoogleMap>:null}

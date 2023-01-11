@@ -34,6 +34,8 @@ const NavBar = () => {
           </div>
         </li>
         <div className='right-nav'>
+          <NavLink className='nav-link' to='/retailers' exact={true}>RETAILERS</NavLink>
+
           {!currUser &&
           <li>
             <NavLink  className='nav-link' to='/login' exact={true} activeClassName='active'>
@@ -47,7 +49,6 @@ const NavBar = () => {
             </NavLink>
           </li>} */}
 
-          <NavLink className='nav-link' to='/retailers' exact={true}>RETAILERS</NavLink>
 
           {currUser &&
           <li>
