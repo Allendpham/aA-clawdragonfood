@@ -64,3 +64,14 @@
    color: black;
    font-weight: 600;
 }
+
+#google-map-form-input input{
+   background-color: none;
+   background: none;
+   border: 2px solid white;
+   color: white;
+}
+
+input::placeholder{
+   color:white;
+}
