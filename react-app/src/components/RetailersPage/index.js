@@ -146,12 +146,12 @@ const RetailersPage = () => {
         <div className="map_page__container">
 
         <div className='retail-information'>
-          <h1>Snapdragon in Stores</h1>
+          <h1>Clawdragon in Stores</h1>
           <div className='retail-bottom-info'>
             <img src='https://i.imgur.com/NWpmsRL.jpg'/>
 
             <div className='retail-paragraphs'>
-              <p>For when you're hankering for noodles and can’t wait for shipping, enter your zip code below to find your nearest retailer of Snapdragon Foods. We're across the map — you can likely find us at your local Costco, Whole Foods Market, Walmart, and more stores. Just keep in mind that not all products are available everywhere. That’s why we recommend keeping a healthy stash on hand at all times.</p>
+              <p>For when you're hankering for noodles and can’t wait for shipping, enter your zip code below to find your nearest retailer of Clawdragon Foods. We're across the map — you can likely find us at your local Costco, Whole Foods Market, Walmart, and more stores. Just keep in mind that not all products are available everywhere. That’s why we recommend keeping a healthy stash on hand at all times.</p>
               <p>The below list doesn’t reflect Costco because it’s too hard to keep track of which Costco stores have our products and which ones are out of stock. Yeah, they move that fast.</p>
               <p>Prefer to shop from your couch? We've got you. Order our instant pho bowls or instant miso ramen and get free shipping on orders $50+. Yum.</p>
               <p>Disclaimer: These locations are not real locations. Educational purposes only.</p>

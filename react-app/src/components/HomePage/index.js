@@ -48,7 +48,7 @@ const HomePage = () => {
                </li>
             ))}
          </ul>
-         <p>Snapdragon’s instant pho and instant ramen bring Asian cravings straight to your mouth. Our bold flavors are dairy-free and antibiotic-free, so you can slurp without guilt. We’ve got vegan and gluten-free noodles, too.</p>
+         <p>Clawdragon’s instant pho and instant ramen bring Asian cravings straight to your mouth. Our bold flavors are dairy-free and antibiotic-free, so you can slurp without guilt. We’ve got vegan and gluten-free noodles, too.</p>
          <NavLink className='shop-food-link' to='/collections/all' exact={true} activeClassName='active'>
             SHOP FOOD
           </NavLink>
